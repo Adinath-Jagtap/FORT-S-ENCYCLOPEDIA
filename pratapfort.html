@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fort Details - Chhatrapati Shivaji Maharaj's Forts Encyclopedia</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+    <style>
+        :root {
+            --primary: #ff6b00;
+            --primary-light: #ff8c33;
+            --primary-dark: #cc5500;
+            --dark-bg: #121212;
+            --dark-surface: #1e1e1e;
+            --dark-surface-2: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .fort-hero {
+            margin-top: 80px;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .fort-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 10s ease;
+        }
+
+        .fort-hero:hover img {
+            transform: scale(1.05);
+        }
+
+        .fort-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(18, 18, 18, 1) 0%, rgba(18, 18, 18, 0.5) 50%, rgba(255, 107, 0, 0.2) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+        }
+
+        .fort-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .fort-location {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .fort-location i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .fort-quick-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .quick-info-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(30, 30, 30, 0.8);
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 107, 0, 0.3);
+        }
+
+        .quick-info-item i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            margin-top: 40px;
+            background-color: var(--dark-surface);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            outline: none;
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Content Styling */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+        }
+
+        .content-block {
+            margin-bottom: 30px;
+        }
+
+        .content-block p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .content-block h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Image Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .gallery-item {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: -50px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark-bg);
+            font-weight: 700;
+            font-size: 0.7rem;
+            box-shadow: 0 0 0 5px var(--dark-bg);
+        }
+
+        .timeline-content {
+            background-color: var(--dark-surface-2);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .timeline-text {
+            color: var(--text-secondary);
+        }
+
+        /* 3D Model Viewer */
+        .model-viewer-container {
+            height: 500px;
+            margin: 30px 0;
+            background-color: var(--dark-surface-2);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .model-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(30, 30, 30, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .model-loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 107, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        .model-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 5;
+        }
+
+        .model-control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .model-control-btn:hover {
+            background-color: var(--primary);
+            color: var(--dark-bg);
+        }
+
+        /* Virtual Tour */
+        .virtual-tour {
+            margin: 30px 0;
+            background-color: var(--dark-surface-2);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 500px;
+        }
+
+        .tour-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(3px);
+            transition: var(--transition);
+        }
+
+        .tour-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tour-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .tour-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .tour-description {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .tour-button {
+            background-color: var(--primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .tour-button i {
+            margin-right: 10px;
+        }
+
+        .tour-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        /* Related Forts */
+        .related-forts {
+            margin: 50px 0;
+        }
+
+        .related-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background-color: var(--dark-surface);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .related-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .related-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .related-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .related-card:hover .related-img img {
+            transform: scale(1.1);
+        }
+
+        .related-info {
+            padding: 20px;
+        }
+
+        .related-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .related-location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .related-location i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .related-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .related-link i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .related-link:hover {
+            color: var(--primary-light);
+        }
+
+        .related-link:hover i {
+            transform: translateX(5px);
+        }
+        /* ----- Related Forts Carousel ----- */
+.related-forts {
+    margin: 50px 0;
+    position: relative;
+}
+
+.related-carousel-container {
+    position: relative;
+    padding: 0 40px;
+}
+
+.related-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+}
+
+.related-carousel::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.related-card {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background-color: var(--dark-surface);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: var(--primary-dark);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .related-carousel-container {
+        padding: 0 30px;
+    }
+    
+    .related-card {
+        flex: 0 0 250px;
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .related-carousel-container {
+        padding: 0 20px;
+    }
+    
+    .related-card {
+        flex: 0 0 220px;
+    }
+}
+        /* Responsive Styles */
+
+        /* Mobile Menu Styles */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-surface);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        padding: 20px 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--primary);
+    }
+    
+    nav ul.show {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+        margin-left: 0;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 10px 20px;
+    }
+    
+    nav ul li a:after {
+        bottom: 5px;
+    }
+}
+        @media (max-width: 992px) {
+            .fort-hero {
+                height: 400px;
+            }
+
+            .fort-title {
+                font-size: 2.5rem;
+            }
+
+            .model-viewer-container, .virtual-tour {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .fort-hero {
+                height: 300px;
+            }
+
+            .fort-hero-overlay {
+                padding: 20px;
+            }
+
+            .fort-title {
+                font-size: 2rem;
+            }
+
+            .fort-quick-info {
+                flex-wrap: wrap;
+            }
+
+            .tab-container {
+                padding: 20px;
+            }
+
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .model-viewer-container, .virtual-tour {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+
+            .fort-hero {
+                height: 250px;
+                border-radius: 10px;
+            }
+
+            .fort-title {
+                font-size: 1.8rem;
+            }
+
+            .fort-location {
+                font-size: 0.9rem;
+            }
+
+            .quick-info-item {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
+            }
+
+            .gallery-item {
+                height: 150px;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline-date {
+                left: -40px;
+            }
+
+            .model-viewer-container, .virtual-tour {
+                height: 300px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>FORTS ENCYCLOPEDIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">HOME</a></li>
+                    <!--<li><a href="index.html#about">ABOUT</a></li> -->
+                    <li><a href="index.html#forts">FORTS</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Fort Hero Section -->
+        <section class="fort-hero">
+            <img src="pratap fort.jpg" alt="Pratapgad Fort">
+            <div class="fort-hero-overlay">
+                <h1 class="fort-title">Pratapgad Fort</h1>
+                <div class="fort-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Satara District, Maharashtra | 17.9373° N, 73.5559° E</span>
+                </div>
+                <div class="fort-quick-info">
+                    <div class="quick-info-item">
+                        <i class="fas fa-mountain"></i>
+                        <span>Elevation: 1080m</span>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Built: 1656–1658</span>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-crown"></i>
+                        <span>Site of the historic Battle of Pratapgad</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <section class="tab-container">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="overview">
+                    <i class="fas fa-info-circle"></i> Overview
+                </button>
+                <button class="tab-button" data-tab="history">
+                    <i class="fas fa-history"></i> History
+                </button>
+                <button class="tab-button" data-tab="architecture">
+                    <i class="fas fa-landmark"></i> Architecture
+                </button>
+                <button class="tab-button" data-tab="strategic">
+                    <i class="fas fa-chess"></i> Strategic Importance
+                </button>
+                <button class="tab-button" data-tab="cultural">
+                    <i class="fas fa-pray"></i> Cultural Significance
+                </button>
+                <button class="tab-button" data-tab="gallery">
+                    <i class="fas fa-images"></i> Gallery
+                </button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i> Introduction & Overview
+                </h2>
+                
+                <div class="content-block">
+                    <p>
+                        <span class="highlight">Pratapgad Fort</span>, standing proudly atop a mountain in the Western Ghats of Maharashtra, is one of the most historically significant forts in India. Commissioned by Chatrapati Shivaji Maharaj in 1656, this formidable structure witnessed the legendary Battle of Pratapgad in 1659, which established Chatrapati Shivaji Maharaj as a formidable military leader and strategist.
+                    </p>
+                    
+                    <p>
+                        Located at an elevation of approximately 1,080 meters (3,540 feet) above sea level, Pratapgad offers sweeping views of the verdant valleys below and the majestic Sahyadri mountain range. The fort's strategic position allowed Maratha forces to monitor and control the vital trade routes passing through the Par pass and the road to Raigad.
+                    </p>
+                    
+                    <p>
+                        Pratapgad is uniquely divided into two distinct sections: the lower fort (Hyadi Buruj), which served primarily as a military garrison, and the upper fort, which housed temples and living quarters. This dual design perfectly embodied Chatrapati Shivaji Maharaj's philosophy of combining military pragmatism with spiritual reverence.
+                    </p>
+                    
+                    <p>
+                        Today, Pratapgad Fort stands as a protected monument under the Archaeological Survey of India and continues to draw thousands of visitors annually. It serves as a tangible testament to the military brilliance, strategic foresight, and cultural heritage of the Maratha Empire under the leadership of Chatrapati Shivaji Maharaj.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Key Highlights</h3>
+                    <ul>
+                        <li>Site of the historic Battle of Pratapgad (1659) where Chatrapati Shivaji Maharaj defeated Afzal Khan</li>
+                        <li>Features the iconic bronze statue of Chatrapati Shivaji Maharaj mounted on horseback</li>
+                        <li>Houses the revered Bhavani Temple, personally consecrated by Chatrapati Shivaji Maharaj</li>
+                        <li>Contains multiple water cisterns and granaries designed for long-term sustainability</li>
+                        <li>Exhibits exceptional military architecture with multiple defensive layers and strategic bastions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div class="tab-content" id="history">
+                <h2 class="section-title">
+                    <i class="fas fa-history"></i> Historical Background
+                </h2>
+                
+                <div class="content-block">
+                    <p>
+                        The history of Pratapgad Fort is intimately tied to the rise of Chatrapati Shivaji Maharaj and the Maratha Empire. Recognizing the strategic importance of the location, Chatrapati Shivaji Maharaj commissioned the construction of Pratapgad in 1656, entrusting the project to <span class="highlight">Moropant Trimbak Pingle</span>, his trusted Prime Minister (Peshwa).
+                    </p>
+                    
+                    <p>
+                        The fort's name, <span class="highlight">Pratapgad</span>, translates to "Fort of Valor," a fitting designation for a structure that would soon bear witness to one of the most significant battles in Indian medieval history. The construction was completed in 1658, just in time to play a pivotal role in the unfolding conflict with the Adilshahi Sultanate of Bijapur.
+                    </p>
+                    
+                    <p>
+                        On November 10, 1659, Pratapgad became the site of the legendary <span class="highlight">Battle of Pratapgad</span>, where Chatrapati Shivaji Maharaj confronted and ultimately killed Afzal Khan, a formidable general of the Adilshahi forces. This victory was not merely a military triumph but a turning point that established the Maratha Empire as a dominant force in the Deccan.
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Pre-1656: Strategic Assessment</h3>
+                            <p class="timeline-text">Chatrapati Shivaji Maharaj identifies the strategic location; preliminary surveys conducted for fort construction.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">February 1656: Construction Begins</h3>
+                            <p class="timeline-text">Moropant Trimbak Pingle oversees initial groundwork; local materials sourced for rapid construction.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">3</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">March 1656: Bhavani Temple Foundation</h3>
+                            <p class="timeline-text">Foundation laid for the sacred Bhavani Temple at Chatrapati Shivaji Maharaj's command; spiritual center takes priority.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">4</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1656–1657: Lower Fort Completion</h3>
+                            <p class="timeline-text">Military sections constructed; barracks, stables, and outer defenses established for garrison forces.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">5</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1657–1658: Upper Fort Development</h3>
+                            <p class="timeline-text">Residential quarters, administrative buildings, and additional water cisterns constructed; temple complex completed.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">6</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">August 1658: Fort Inauguration</h3>
+                            <p class="timeline-text">Chatrapati Shivaji Maharaj officially inaugurates the completed Pratapgad; Bhavani Temple consecrated with Vedic rituals.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">7</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">September 1659: Strategic Preparations</h3>
+                            <p class="timeline-text">Chatrapati Shivaji Maharaj fortifies Pratapgad in anticipation of Adilshahi response; plans guerrilla defense strategy.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">8</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">November 10, 1659: Battle of Pratapgad</h3>
+                            <p class="timeline-text">Historic confrontation between Chatrapati Shivaji Maharaj and Afzal Khan; Maratha victory signals rise of new power.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">9</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1660–1674: Fortification Enhancements</h3>
+                            <p class="timeline-text">Additional defensive structures added; water conservation systems expanded; garrison strength increased.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">10</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1674–1680: Coronation Period</h3>
+                            <p class="timeline-text">Following Chatrapati Shivaji Maharaj's coronation, Pratapgad serves as secondary administrative center during seasonal movements.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">11</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1680–1707: Succession Period</h3>
+                            <p class="timeline-text">Fort maintained as key stronghold during Sambhaji's rule; withstands Mughal expansion efforts under Aurangzeb.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">12</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1708–1818: Peshwa Administration</h3>
+                            <p class="timeline-text">Under Peshwa control, fort serves as regional administrative center and monsoon retreat for officials.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">13</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1818: British Acquisition</h3>
+                            <p class="timeline-text">Fort passes to British control following Third Anglo-Maratha War; minimal garrison maintained.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">14</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1957: Monument Status</h3>
+                            <p class="timeline-text">Declared protected monument under Archaeological Survey of India; initial conservation efforts begin.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">15</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1957–1962: Statue Installation</h3>
+                            <p class="timeline-text">Bronze equestrian statue of Chatrapati Shivaji Maharaj installed near Afzal Khan's tomb; becomes iconic landmark.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">16</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Present Day: Heritage Preservation</h3>
+                            <p class="timeline-text">Ongoing ASI conservation efforts; annual commemorative celebrations of Battle of Pratapgad; major pilgrimage and tourism site.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Tab -->
+            <div class="tab-content" id="architecture">
+                <h2 class="section-title">
+                    <i class="fas fa-landmark"></i> Architectural & Structural Details
+                </h2>
+                
+                <div class="content-block">
+                    <p>
+                        Pratapgad Fort exemplifies the distinctive architectural style of Maratha military fortifications, characterized by its intelligent adaptation to the mountainous terrain and emphasis on defensive capabilities. Spanning approximately 6.5 acres in total area, the fort demonstrates Chatrapati Shivaji Maharaj's profound understanding of military architecture and terrain utilization.
+                    </p>
+                    
+                    <h3>Fort Layout & Structure</h3>
+                    <p>
+                        The most distinctive feature of Pratapgad is its division into two main sections: the <span class="highlight">Lower Fort</span> (Hyadi Buruj) and the <span class="highlight">Upper Fort</span>. The lower fort, larger in area, served primarily military purposes with extensive barracks, stables, and ammunition storage facilities. The upper fort, more compact and elevated, contained religious structures and accommodations for the fort administrators and dignitaries.
+                    </p>
+                    
+                    <h3>Defensive Structures</h3>
+                    <p>
+                        The fort's defensive system features multiple layers of fortification with walls ranging from 12 to 40 feet in height. The main entrance, guarded by sturdy wooden doors reinforced with metal spikes, is approached through a winding pathway that exposes potential attackers to defensive fire from multiple angles. The <span class="highlight">Mahadarwaja</span> (Grand Gate) is strategically positioned to force a sharp turn in the approach, breaking the momentum of any charging force.
+                    </p>
+                    
+                    <h3>Water Management Systems</h3>
+                    <p>
+                        Given its elevated position, water management was a critical consideration in Pratapgad's design. The fort contains several ingeniously designed water cisterns that harvest rainwater. The largest of these, <span class="highlight">Dhankoshi</span>, could sustain the fort's population during prolonged siege conditions. Channels and conduits direct rainwater from the fort's expansive rooftops and plateaus into these storage reservoirs, demonstrating advanced hydrological engineering for the period.
+                    </p>
+                    
+                    <h3>Religious & Administrative Structures</h3>
+                    <p>
+                        The upper fort houses the renowned <span class="highlight">Bhavani Temple</span>, personally established by Chatrapati Shivaji Maharaj. Built in the regional temple architectural style with influences of both Deccan and Hemadpanti designs, the temple features a sanctum housing the deity Goddess Bhavani, Chatrapati Shivaji Maharaj's family deity. The temple complex also includes smaller shrines dedicated to Lord Ganesha and other deities.
+                    </p>
+                    
+                    <h3>Construction Materials & Techniques</h3>
+                    <p>
+                        The fort is primarily constructed using locally quarried basalt stone, bound with lime mortar fortified with jaggery, pulses, and other organic materials that enhanced its bonding strength. The walls were constructed using the dry masonry technique in many sections, allowing for flexibility that could withstand earthquakes common to the region. Interior structures feature woodwork typical of 17th-century Maratha architecture, with detailed carvings and functional design elements.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strategic Importance Tab -->
+            <div class="tab-content" id="strategic">
+                <h2 class="section-title">
+                    <i class="fas fa-chess"></i> Strategic & Military Importance
+                </h2>
+                
+                <div class="content-block">
+                    <p>
+                        Pratapgad Fort represents one of the finest examples of Chatrapati Shivaji Maharaj's strategic genius and military foresight. Its construction and position were carefully planned to serve multiple tactical objectives within the broader framework of Maratha military doctrine.
+                    </p>
+                    
+                    <h3>Geographical Advantage</h3>
+                    <p>
+                        Positioned at the convergence of the Par and Koyna valleys at an elevation of 1,080 meters, Pratapgad commanded exceptional visibility across the crucial trade and military routes connecting the coastal regions with the Deccan plateau. This vantage point enabled Maratha forces to monitor movement across vast distances, providing critical intelligence and reaction time.
+                    </p>
+                    
+                    <p>
+                        The fort's location on a steep mountain with limited approach routes made it naturally defensible, requiring minimal manpower to secure against even sizeable enemy forces. The surrounding dense forests provided additional natural protection and offered cover for Maratha guerrilla operations in the region.
+                    </p>
+                    
+                    <h3>Battle of Pratapgad & Military Significance</h3>
+                    <p>
+                        The fort gained eternal military significance as the site of the historic <span class="highlight">Battle of Pratapgad</span> on November 10, 1659. This confrontation between Chatrapati Shivaji Maharaj and the Adilshahi general Afzal Khan demonstrated Chatrapati Shivaji Maharaj's tactical brilliance in choosing terrain that neutralized the enemy's numerical advantage.
+                    </p>
+                    
+                    <p>
+                        Prior to the battle, Chatrapati Shivaji Maharaj carefully positioned his forces in the forests surrounding Pratapgad, creating an elaborate ambush system. When the Adilshahi army approached, they were channeled into unfavorable positions where their cavalry and conventional battle formations became ineffective against the highly mobile Maratha forces emerging from multiple directions.
+                    </p>
+                    
+                    <h3>Role in Defensive Network</h3>
+                    <p>
+                        Pratapgad formed an integral part of Chatrapati Shivaji Maharaj's comprehensive network of forts across the Western Ghats. It maintained communication links with nearby forts including Raigad, Torna, and Rajgad through a sophisticated system of signal fires, messenger routes, and visual communication methods.
+                    </p>
+                    
+                    <p>
+                        This interconnected defensive system allowed for rapid response to threats, resource sharing during conflicts, and coordinated military operations across the Maratha territory. Pratapgad specifically protected the approach routes to the Maratha heartland and provided a secure base for offensive operations against the Adilshahi territories.
+                    </p>
+                    
+                    <h3>Logistical Capabilities</h3>
+                    <p>
+                        The fort was designed with extensive self-sufficiency features to withstand prolonged sieges. Its elaborate water collection systems, granaries, and armories could sustain a substantial garrison for months without external support. These capabilities made it an ideal forward base for Maratha military operations, providing secure logistical support for campaigns in surrounding territories.
+                    </p>
+                    
+                    <p>
+                        Additionally, the fort's dual structure allowed for efficient separation of military and administrative functions. The lower fort's extensive military facilities could accommodate substantial forces when needed, while the upper fort provided secure command facilities where strategic planning could be conducted away from the main garrison areas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cultural Significance Tab -->
+            <div class="tab-content" id="cultural">
+                <h2 class="section-title">
+                    <i class="fas fa-pray"></i> Cultural, Social, & Religious Significance
+                </h2>
+                
+                <div class="content-block">
+                    <p>
+                        Beyond its military significance, Pratapgad Fort holds profound cultural, social, and religious importance in Maratha history and continues to serve as a spiritual center and symbol of regional identity to this day.
+                    </p>
+                    
+                    <h3>Spiritual Center: The Bhavani Temple</h3>
+                    <p>
+                        The <span class="highlight">Bhavani Temple</span> at Pratapgad represents one of the most significant spiritual sites in the Maratha cultural landscape. Personally established by Chatrapati Shivaji Maharaj, the temple is dedicated to Goddess Bhavani, the family deity of the Bhonsle clan and Chatrapati Shivaji Maharaj's spiritual guide throughout his campaigns.
+                    </p>
+                    
+                    <p>
+                        Historical accounts record that before confronting Afzal Khan, Chatrapati Shivaji Maharaj sought divine blessing at this temple. It is said that the goddess bestowed upon him the famous <span class="highlight">Bhavani Sword</span> and tiger claws (<span class="highlight">bagh nakh</span>) that he later used in his confrontation with Afzal Khan. This spiritual connection transformed the temple into a symbol of divine sanction for the Maratha resistance against foreign domination.
+                    </p>
+                    
+                    <h3>Symbol of Maratha Identity & Pride</h3>
+                    <p>
+                        The victory at Pratapgad marked a turning point in establishing Maratha sovereignty and has become emblematic of Maratha pride and identity. The fort represents not just a military triumph but the cultural and spiritual resilience of the Maratha people under Chatrapati Shivaji Maharaj's leadership.
+                    </p>
+                    
+                    <p>
+                        The imposing bronze statue of Chatrapati Shivaji Maharaj on horseback, installed at Pratapgad in 1957, has become an iconic landmark and pilgrimage site. Standing 17 feet high, the statue depicts Chatrapati Shivaji Maharaj in his moment of triumph, serving as a powerful visual reminder of his legacy and the values he embodied.
+                    </p>
+                    
+                    <h3>Folklore & Cultural Traditions</h3>
+                    <p>
+                        Numerous legends, ballads, and folk narratives (povadas) associated with Pratapgad have been preserved in Maratha oral tradition. These cultural expressions detail the events surrounding the Battle of Pratapgad, often embellished with supernatural elements that highlight Chatrapati Shivaji Maharaj's divine protection and extraordinary courage.
+                    </p>
+                    
+                    <p>
+                        The annual commemoration of the Battle of Pratapgad on November 10 has evolved into a significant cultural festival, drawing thousands of visitors from across Maharashtra. These celebrations typically include traditional martial displays, religious ceremonies at the Bhavani Temple, historical reenactments, and folk performances that keep the cultural memory of these events alive for newer generations.
+                    </p>
+                    
+                    <h3>Modern Cultural Significance</h3>
+                    <p>
+                        Today, Pratapgad continues to inspire Maharashtra's cultural expressions across various media. The fort and the events that transpired there have been immortalized in literature, cinema, television serials, and visual arts. It features prominently in educational curricula throughout Maharashtra, ensuring that the values associated with Chatrapati Shivaji Maharaj's legacy—courage, strategic thinking, respect for diverse faiths, and indigenous governance—are transmitted to future generations.
+                    </p>
+                    
+                    <p>
+                        The site also serves as an important center for historical research and archaeological studies, contributing to the ongoing scholarly understanding of medieval Maratha military architecture, governance systems, and cultural practices. Conservation efforts at Pratapgad reflect the continued importance of the site in maintaining connections to Maharashtra's cultural heritage.
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Gallery Tab -->
+            <div class="tab-content" id="gallery">
+                <h2 class="section-title">
+                    <i class="fas fa-images"></i> Image Gallery
+                </h2>
+                
+                <div class="gallery">
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Aerial view of Pratapgad Fort" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Aerial view of Pratapgad Fort">
+                        <div class="gallery-caption">Aerial view of Pratapgad Fort</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Mahadarwaja (Grand Entrance)" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Mahadarwaja (Grand Entrance)">
+                        <div class="gallery-caption">Mahadarwaja (Grand Entrance)</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Bhavani Temple" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Bhavani Temple">
+                        <div class="gallery-caption">Bhavani Temple</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Bronze Statue of Chatrapati Shivaji Maharaj" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Bronze Statue of Chatrapati Shivaji Maharaj">
+                        <div class="gallery-caption">Bronze Statue of Chatrapati Shivaji Maharaj</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Afzal Khan's Tomb" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Afzal Khan's Tomb">
+                        <div class="gallery-caption">Afzal Khan's Tomb</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Lower Fort (Hyadi Buruj)" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Lower Fort (Hyadi Buruj)">
+                        <div class="gallery-caption">Lower Fort (Hyadi Buruj)</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Dhankoshi Water Cistern" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Dhankoshi Water Cistern">
+                        <div class="gallery-caption">Dhankoshi Water Cistern</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Panoramic view from Pratapgad" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Panoramic view from Pratapgad">
+                        <div class="gallery-caption">Panoramic view from Pratapgad</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Historical Battle Site" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Historical Battle Site">
+                        <div class="gallery-caption">Historical Battle Site</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Ancient Cannon at Pratapgad" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Ancient Cannon at Pratapgad">
+                        <div class="gallery-caption">Ancient Cannon at Pratapgad</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Steps to Upper Fort" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Steps to Upper Fort">
+                        <div class="gallery-caption">Steps to Upper Fort</div>
+                    </a>
+                    
+                    <a href="/api/placeholder/800/600" data-lightbox="pratapgad-gallery" data-title="Sunrise View from Pratapgad" class="gallery-item">
+                        <img src="/api/placeholder/300/200" alt="Sunrise View from Pratapgad">
+                        <div class="gallery-caption">Sunrise View from Pratapgad</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3D Model Tab
+            <div class="tab-content" id="3d-model">
+                <h2 class="section-title">
+                    <i class="fas fa-cube"></i> 3D Model Exploration
+                </h2>
+                
+                <div class="model-viewer-container">
+                    <div class="model-loader">
+                        <div class="model-loader-spinner"></div>
+                        <p>Loading 3D Model...</p>
+                    </div>
+                    
+                    <img src="/api/placeholder/1200/500" alt="3D Model Placeholder" style="width: 100%; height: 100%; object-fit: cover;">
+                    
+                    <div class="model-controls">
+                        <div class="model-control-btn">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="model-control-btn">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                        <div class="model-control-btn">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="model-control-btn">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-block">
+                    <p>
+                        Explore this highly detailed 3D model of Raigad Fort, reconstructed based on historical accounts, architectural surveys, and archaeological findings. This interactive model allows you to examine the fort's layout, defensive structures, and significant buildings from any angle.
+                    </p>
+                    
+                    <p>
+                        Use the control buttons to zoom in/out, rotate the model, and toggle between different time periods to see how the fort evolved throughout history. Click on highlighted areas to learn more about specific structures and their functions.
+                    </p>
+                    
+                    <p>
+                        <strong>Note:</strong> For the best experience, a high-speed internet connection is recommended. The 3D model may take a moment to fully load depending on your connection speed.
+                    </p>
+                </div>
+            </div>  -->
+
+            <!-- Virtual Tour Tab 
+            <div class="tab-content" id="virtual-tour">
+                <h2 class="section-title">
+                    <i class="fas fa-vr-cardboard"></i> Virtual Tour Experience
+                </h2>
+                
+                <div class="virtual-tour">
+                    <img src="/api/placeholder/1200/500" alt="Virtual Tour Placeholder" class="tour-placeholder">
+                    
+                    <div class="tour-overlay">
+                        <div class="tour-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <h3 class="tour-title">Immersive Virtual Tour</h3>
+                        <p class="tour-description">
+                            Experience a guided virtual walkthrough of Raigad Fort with historical narration and 360° panoramic views. Explore hard-to-reach areas and witness historical reenactments of key events that took place within these walls.
+                        </p>
+                        <button class="tour-button">
+                            <i class="fas fa-play"></i>
+                            Start Virtual Tour
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="content-block">
+                    <p>
+                        Our virtual tour offers a unique opportunity to explore Raigad Fort from anywhere in the world. Using cutting-edge VR technology, we've recreated the fort complex with historical accuracy, allowing you to experience it as it might have appeared during Chatrapati Shivaji Maharaj's reign.
+                    </p>
+                    
+                    <p>
+                        The tour includes narration by historical experts, ambient sounds, and interactive elements that bring the fort's rich history to life. Navigate through key locations including the Maha Darwaja, Rajsabha, Jagadishwar Temple, and more, with detailed information provided at each stop.
+                    </p>
+                    
+                    <h3>Tour Highlights:</h3>
+                    <ul>
+                        <li>360° panoramic views of significant locations</li>
+                        <li>Historical reenactments of the coronation ceremony</li>
+                        <li>Before-and-after visualizations showing original versus current state</li>
+                        <li>Expert commentary on architectural and historical details</li>
+                        <li>Access to areas that may be restricted during physical visits</li>
+                    </ul>
+                </div>
+            </div>-->
+        </section> 
+
+        
+        <!-- Related Forts Section 
+<section class="related-forts">
+    <h2 class="related-title">Explore More Forts</h2>
+    
+    <div class="related-carousel-container">
+        <div class="related-carousel">
+            <div class="related-card">
+                <div class="related-img">
+                    <img src="/api/placeholder/300/180" alt="Pratapgad Fort">
+                </div>
+                <div class="related-info">
+                    <h3 class="related-name">Pratapgad Fort</h3>
+                    <div class="related-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Satara District</span>
+                    </div>
+                    <a href="#" class="related-link">Explore Fort <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="related-card">
+                <div class="related-img">
+                    <img src="/api/placeholder/300/180" alt="Sindhudurg Fort">
+                </div>
+                <div class="related-info">
+                    <h3 class="related-name">Sindhudurg Fort</h3>
+                    <div class="related-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Malvan, Sindhudurg</span>
+                    </div>
+                    <a href="#" class="related-link">Explore Fort <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="related-card">
+                <div class="related-img">
+                    <img src="/api/placeholder/300/180" alt="Rajgad Fort">
+                </div>
+                <div class="related-info">
+                    <h3 class="related-name">Rajgad Fort</h3>
+                    <div class="related-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Pune District</span>
+                    </div>
+                    <a href="#" class="related-link">Explore Fort <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="related-card">
+                <div class="related-img">
+                    <img src="/api/placeholder/300/180" alt="Torna Fort">
+                </div>
+                <div class="related-info">
+                    <h3 class="related-name">Torna Fort</h3>
+                    <div class="related-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Pune District</span>
+                    </div>
+                    <a href="#" class="related-link">Explore Fort <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+</section>-->
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script>
+        // Tab Navigation
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Mobile Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('nav ul');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+});
+
+        // Timeline Animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+
+        // Update carousel script
+const carousel = document.querySelector('.related-carousel');
+const prevButton = document.querySelector('.carousel-prev');
+const nextButton = document.querySelector('.carousel-next');
+
+const scrollAmount = 320; // Match card width + gap
+
+prevButton.addEventListener('click', () => {
+    carousel.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+    });
+});
+
+nextButton.addEventListener('click', () => {
+    carousel.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+    });
+});
+
+        // 3D Model Loader Simulation
+        setTimeout(() => {
+            const modelLoader = document.querySelector('.model-loader');
+            if (modelLoader) {
+                modelLoader.style.opacity = 0;
+                setTimeout(() => {
+                    modelLoader.style.display = 'none';
+                }, 500);
+            }
+        }, 3000);
+
+        // Lightbox Configuration
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'fadeDuration': 300,
+            'imageFadeDuration': 300
+        });
+    </script>
+</body>
+</html>
